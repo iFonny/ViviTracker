@@ -53,12 +53,43 @@ bot.on('messageCreate', m => {
     if (!require('./data/allowedIDS.json').includes(m.author.id)) return;
 
     if (m.content.toLowerCase().startsWith(__config.settings.prefix)) {
-
         let command = m.content.slice(__config.settings.prefix.length, m.content.length).split(" ")[0].toLowerCase();
         let params = m.content.slice(command.length + __config.settings.prefix.length + 1, m.content.length);
 
-        if (Commands[command]) {
-            Commands[command].fn(Client, bot, m, params);
-        }
+        if (Commands[command]) Commands[command].fn(Client, bot, m, params);
     }
+});
+
+/**
+ * Tracker core :eyes: 👀
+ */
+
+bot.on('messageDelete', m => {
+    // TODO: IL FAUT TRAVAILLER !!!
+});
+
+
+/**
+ * Events
+ */
+
+bot.on("error", e => {
+    console.log(e);
+});
+
+bot.on("warn", e => {
+    console.log(e);
+});
+
+bot.on("disconnect", () => {
+    setTimeout(() => {
+        process.exit(1);
+    }, 1500);
+});
+
+process.on("SIGINT", () => {
+    bot.disconnect(false);
+    setTimeout(() => {
+        process.exit(1);
+    }, 5000);
 });

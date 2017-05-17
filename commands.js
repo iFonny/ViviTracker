@@ -1,4 +1,4 @@
-var Commands = [];
+let Commands = [];
 
 Commands.track = {
     name: 'track',
