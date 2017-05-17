@@ -69,6 +69,44 @@ bot.on('messageDelete', m => {
 });
 
 
+
+bot.on('voiceChannelJoin', (member, newChannel) => {
+    if (!require('./data/allowedIDS.json').includes(m.author.id)) return;
+    else {
+        Client.fn.vocalTrack(Client, {
+            member,
+            newChannel
+        }, 'join');
+    }
+});
+
+bot.on('voiceChannelLeave', (member, oldChannel) => {
+    if (!require('./data/allowedIDS.json').includes(m.author.id)) return;
+    else {
+        Client.fn.vocalTrack(Client, {
+            member,
+            oldChannel
+        }, 'leave');
+    }
+});
+
+bot.on('voiceChannelSwitch', (member, newChannel, oldChannel) => {
+    if (!require('./data/allowedIDS.json').includes(m.author.id)) return;
+    else {
+        Client.fn.vocalTrack(Client, {
+            member,
+            oldChannel
+        }, 'leave');
+
+        setTimeout(() => {
+            Client.fn.vocalTrack(Client, {
+                member,
+                newChannel
+            }, 'leave');
+        }, 50);
+    }
+});
+
 /**
  * Events
  */
