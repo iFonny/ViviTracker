@@ -71,7 +71,7 @@ bot.on('messageDelete', m => {
 
 
 bot.on('voiceChannelJoin', (member, newChannel) => {
-    if (!require('./data/allowedIDS.json').includes(m.author.id)) return;
+    if (!require('./data/allowedIDS.json').includes(member.id)) return;
     else {
         Client.fn.vocalTrack(Client, {
             member,
@@ -81,7 +81,7 @@ bot.on('voiceChannelJoin', (member, newChannel) => {
 });
 
 bot.on('voiceChannelLeave', (member, oldChannel) => {
-    if (!require('./data/allowedIDS.json').includes(m.author.id)) return;
+    if (!require('./data/allowedIDS.json').includes(member.id)) return;
     else {
         Client.fn.vocalTrack(Client, {
             member,
@@ -91,7 +91,7 @@ bot.on('voiceChannelLeave', (member, oldChannel) => {
 });
 
 bot.on('voiceChannelSwitch', (member, newChannel, oldChannel) => {
-    if (!require('./data/allowedIDS.json').includes(m.author.id)) return;
+    if (!require('./data/allowedIDS.json').includes(member.id)) return;
     else {
         Client.fn.vocalTrack(Client, {
             member,
