@@ -1,0 +1,7 @@
+{
+    "token": "DISCORD BOT TOKEN",
+    "settings": {
+        "prefix": "/",
+        "privateChannel": "CHANNEL ID"
+    }
+}

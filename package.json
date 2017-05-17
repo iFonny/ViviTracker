@@ -1,0 +1,26 @@
+{
+  "name": "vivitracker",
+  "version": "1.0.0",
+  "description": "Track discord message suppressions",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iFonny/ViviTracker.git"
+  },
+  "keywords": [
+    "discord"
+  ],
+  "author": "iFonny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iFonny/ViviTracker/issues"
+  },
+  "homepage": "https://github.com/iFonny/ViviTracker#readme",
+  "dependencies": {
+    "fs": "0.0.1-security"
+  }
+}
