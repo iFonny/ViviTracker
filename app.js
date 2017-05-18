@@ -47,8 +47,6 @@ bot.on('ready', () => {
     console.log('Follow list: ');
     if (followed && followed.id)
         console.log(`- ${followed.username}#${followed.discriminator}`);
-
-    Object.keys(users).forEach((key) => {});
 });
 
 

@@ -64,12 +64,20 @@ Commands.tracklist = {
     name: 'tracklist',
     help: 'List of tracked users.',
     fn: function (Client, bot, m, params) {
-        let msg = '__Track list:__ \n\n';
+        delete require.cache[require.resolve('./data/trackedUsers.json')];
+        delete require.cache[require.resolve('./data/followedUser.json')];
         let users = require('./data/trackedUsers.json');
+        let followed = require('./data/followedUser.json');
+
+        let msg = '__Track list:__ \n\n';
 
         Object.keys(users).forEach((key) => {
             msg += `- <@${users[key].id}> | private: **${users[key].settings.private}** | public: **${users[key].settings.public}**\n`;
         });
+
+        msg += '\n\n__Follow list:__ \n\n';
+        if (followed && followed.id)
+            msg += `- ${followed.username}#${followed.discriminator}`;
 
         Client.fn.dm(bot, m.author.id, msg);
     }
