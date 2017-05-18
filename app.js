@@ -107,7 +107,8 @@ bot.on('voiceChannelLeave', (member, oldChannel) => {
 });
 
 bot.on('voiceChannelSwitch', (member, newChannel, oldChannel) => {
-
+    let trackedUsers = require('./data/trackedUsers.json');
+    
     if (require('./data/followedUser.json').id == member.id) {
         // TODO: Join channel
     }
