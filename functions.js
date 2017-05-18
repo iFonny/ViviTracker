@@ -24,12 +24,11 @@ module.exports = {
                 timestamp: new Date(),
                 author: {
                     name: user.username,
-                    url: 'http://ifonny.fr',
                     icon_url: user.avatar
                 },
                 fields: [{
                     name: '👀 Message deleted 🗑',
-                    value: `<@${user.id}> 💬 \`\`\`\n${message.content}\n\`\`\``,
+                    value: `<@${user.id}> 💬 <#${message.channel.id}> \`\`\`\n${message.content}\n\`\`\``,
                     inline: true
                 }]
             }
