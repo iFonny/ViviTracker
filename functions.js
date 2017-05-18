@@ -1,6 +1,6 @@
 module.exports = {
 
-    dm: function(bot, id, contenu) {
+    dm: function (bot, id, contenu) {
         bot.getDMChannel(id).then(channel => {
             bot.createMessage(channel.id, contenu);
         }).catch(error => {
@@ -14,6 +14,10 @@ module.exports = {
         for (let i = 0; i < params.length; i++)
             if (params[i] != '') news.push(params[i]);
         return news;
+    },
+
+    sendLogMessage: (Client, bot, message) => {
+
     },
 
     trackUser: (Client, user) => {
@@ -48,9 +52,31 @@ module.exports = {
         });
     },
 
+    followUser: (Client, user) => {
+        return promise = new Promise((resolve, reject) => {
+            Client.fs.writeFile('./data/followedUser.json', JSON.stringify(user), (err) => {
+                if (err) return reject(err);
+
+                console.log(`Now follow: ${user.username}#${user.discriminator}.`);
+                resolve(user);
+            });
+        })
+    },
+
+    unfollowUser: (Client) => {
+        return promise = new Promise((resolve, reject) => {
+            Client.fs.writeFile('./data/followedUser.json', JSON.stringify({}), (err) => {
+                if (err) return reject(err);
+
+                console.log(`No longer follow`);
+                resolve();
+            });
+        })
+    },
+
     getDate: () => {
         return `${new Date().getDate()().length == 1 ? '0' + new Date().getDate()() : new Date().getDate()()}/${(new Date().getMonth() + 1).toString().length == 1 ? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)}/${new Date().getFullYear()} - ${new Date().getHours().toString().length == 1 ? '0' + new Date().getHours().toString() : new Date().getHours()}h${new Date().getMinutes().toString().length == 1 ? '0' + new Date().getMinutes().toString() : new Date().getMinutes()}`
-    }
+    },
 
     vocalTrack: (Client, data, action) => {
         return promise = new Promise((resolve, reject) => {

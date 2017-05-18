@@ -65,46 +65,58 @@ bot.on('messageCreate', m => {
  */
 
 bot.on('messageDelete', m => {
-    // TODO: IL FAUT TRAVAILLER !!!
+    let trackedUsers = require('./data/trackedUsers.json');
+
+    if (m.author && trackedUsers[m.author.id]) {
+        if (trackedUsers[m.author.id].settings.private) {
+            // TODO: send message in __config.settings.privateChannel
+        }
+        if (trackedUsers[m.author.id].settings.public) {
+            // TODO: send message in m.channel.id
+        }
+            
+    }
 });
 
-
-
 bot.on('voiceChannelJoin', (member, newChannel) => {
-    if (!require('./data/allowedIDS.json').includes(member.id)) return;
-    else {
-        Client.fn.vocalTrack(Client, {
-            member,
-            newChannel
-        }, 'join');
+    let trackedUsers = require('./data/trackedUsers.json');
+
+    if (require('./data/followedUser.json').id == member.id) {
+        // TODO: Join channel
     }
+
+    if (trackedUsers[member.id]) {
+        // TODO: send message in __config.settings.privateChannel
+    }
+
+    console.log(member.username + '(' + member.id  + ')' + ' join ' + newChannel.name);
 });
 
 bot.on('voiceChannelLeave', (member, oldChannel) => {
-    if (!require('./data/allowedIDS.json').includes(member.id)) return;
-    else {
-        Client.fn.vocalTrack(Client, {
-            member,
-            oldChannel
-        }, 'leave');
+    let trackedUsers = require('./data/trackedUsers.json');
+
+    if (require('./data/followedUser.json').id == member.id) {
+        // TODO: Leave channel
     }
+
+    if (trackedUsers[member.id]) {
+        // TODO: send message in __config.settings.privateChannel
+    }
+
+    console.log(member.username + '(' + member.id  + ')' + ' leave ' + oldChannel.name);
 });
 
 bot.on('voiceChannelSwitch', (member, newChannel, oldChannel) => {
-    if (!require('./data/allowedIDS.json').includes(member.id)) return;
-    else {
-        Client.fn.vocalTrack(Client, {
-            member,
-            oldChannel
-        }, 'leave');
 
-        setTimeout(() => {
-            Client.fn.vocalTrack(Client, {
-                member,
-                newChannel
-            }, 'leave');
-        }, 50);
+    if (require('./data/followedUser.json').id == member.id) {
+        // TODO: Join channel
     }
+
+    if (trackedUsers[member.id]) {
+        // TODO: send message in __config.settings.privateChannel
+    }
+
+    console.log(member.username + '(' + member.id  + ')' + ' switch from ' + oldChannel.name + ' to ' + newChannel.name);
 });
 
 /**

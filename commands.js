@@ -82,4 +82,38 @@ Commands.tracklist = {
     }
 }
 
+Commands.follow = {
+    name: 'follow',
+    help: 'Follow user.',
+    usage: '<@USER>',
+    fn: function (Client, bot, m, params) {
+        m.delete();
+
+        // Split params in array
+        params = Client.fn.splitParams(params);
+
+        if (m.mentions && m.mentions[0]) {
+            Client.fn.followUser(Client, {
+                    id: m.mentions[0].id,
+                    username: m.mentions[0].username,
+                    discriminator: m.mentions[0].discriminator,
+                    avatar: m.mentions[0].avatarURL
+                }).then((user) => Client.fn.dm(bot, m.author.id, `:white_check_mark: Now follow <@${m.mentions[0].id}>`))
+                .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
+        }
+    }
+}
+
+Commands.unfollow = {
+    name: 'unfollow',
+    help: 'Unfollow user.',
+    fn: function (Client, bot, m, params) {
+        m.delete();
+
+        Client.fn.unfollowUser(Client)
+            .then((user) => Client.fn.dm(bot, m.author.id, `:white_check_mark: Follow disabled`))
+            .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
+    }
+}
+
 exports.Commands = Commands
