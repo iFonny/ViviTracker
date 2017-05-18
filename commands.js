@@ -3,30 +3,21 @@ let Commands = [];
 Commands.track = {
     name: 'track',
     help: 'Track user.',
-    usage: '(<public>)(<private>) <@USER> (<@USER>+)',
+    usage: '(<public>) <@USER> (<@USER>+)',
     fn: function (Client, bot, m, params) {
-        let settings = {};
-        m.delete();
+
+        // Default settings
+        let settings = {
+            private: true,
+            public: false
+        };
 
         // Split params in array
         params = Client.fn.splitParams(params);
 
-        // Default settings
-        if (!(params.includes('private') || params.includes('priv')) &&
-            !(params.includes('public') || params.includes('pub'))) {
-            settings.private = true;
+        // Get settings
+        if (params.includes('public') || params.includes('pub'))
             settings.public = true;
-        } else {
-
-            // Get settings
-            if (params.includes('public') || params.includes('pub'))
-                settings.public = true;
-            else settings.public = false;
-
-            if (params.includes('private') || params.includes('priv'))
-                settings.private = true;
-            else settings.private = false;
-        }
 
         // Save users to track
         m.mentions.forEach((item) => {
@@ -48,10 +39,14 @@ Commands.untrack = {
     usage: '<@USER> (<@USER>+)',
     fn: function (Client, bot, m, params) {
         let settings = {};
-        m.delete();
 
         // Split params in array
         params = Client.fn.splitParams(params);
+
+        if (params[0] && params[0] == 'all')
+            Client.fn.untrackAll(Client)
+            .then((user) => Client.fn.dm(bot, m.author.id, `:white_check_mark: All users deleted`))
+            .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
 
         // Save users to track
         m.mentions.forEach((item) => {
@@ -69,8 +64,6 @@ Commands.tracklist = {
     name: 'tracklist',
     help: 'List of tracked users.',
     fn: function (Client, bot, m, params) {
-        m.delete();
-
         let msg = '__Tracking list:__ \n\n';
         let users = require('./data/trackedUsers.json');
 
@@ -87,7 +80,6 @@ Commands.follow = {
     help: 'Follow user.',
     usage: '<@USER>',
     fn: function (Client, bot, m, params) {
-        m.delete();
 
         // Split params in array
         params = Client.fn.splitParams(params);
@@ -108,7 +100,6 @@ Commands.unfollow = {
     name: 'unfollow',
     help: 'Unfollow user.',
     fn: function (Client, bot, m, params) {
-        m.delete();
 
         Client.fn.unfollowUser(Client)
             .then((user) => Client.fn.dm(bot, m.author.id, `:white_check_mark: Follow disabled`))

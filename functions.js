@@ -16,8 +16,25 @@ module.exports = {
         return news;
     },
 
-    sendLogMessage: (Client, bot, message) => {
-
+    sendDeletedMessage: (Client, bot, user, message) => {
+        let embed = {
+            content: "\n",
+            embed: {
+                color: __config.colors.red,
+                timestamp: new Date(),
+                author: {
+                    name: user.username,
+                    url: 'http://ifonny.fr',
+                    icon_url: user.avatar
+                },
+                fields: [{
+                    name: '👀 Message deleted 🗑',
+                    value: `<@${user.id}> 💬 \`\`\`\n${message.content}\n\`\`\``,
+                    inline: true
+                }]
+            }
+        }
+        bot.createMessage(__config.settings.privateChannel, embed);
     },
 
     trackUser: (Client, user) => {
@@ -48,6 +65,19 @@ module.exports = {
 
                 console.log(`${user.username}#${user.discriminator} Untracked.`);
                 resolve(user);
+            });
+        });
+    },
+
+    untrackAll: (Client) => {
+        return promise = new Promise((resolve, reject) => {
+            let tracked = {};
+
+            Client.fs.writeFile('./data/trackedUsers.json', JSON.stringify(tracked), (err) => {
+                if (err) return reject(err);
+
+                console.log(`All users Untracked.`);
+                resolve();
             });
         });
     },
