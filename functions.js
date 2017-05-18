@@ -34,11 +34,14 @@ module.exports = {
                 }]
             }
         }
-        bot.createMessage(__config.settings.privateChannel, embed);
+
+        if (message.content && message.content.trim() != '')
+            bot.createMessage(__config.settings.privateChannel, embed);
     },
 
     trackUser: (Client, user) => {
         return promise = new Promise((resolve, reject) => {
+            delete require.cache[require.resolve('./data/trackedUsers.json')];
             let tracked = require('./data/trackedUsers.json');
 
             if (!tracked) tracked = {};
@@ -55,6 +58,7 @@ module.exports = {
 
     untrackUser: (Client, user) => {
         return promise = new Promise((resolve, reject) => {
+            delete require.cache[require.resolve('./data/trackedUsers.json')];
             let tracked = require('./data/trackedUsers.json');
 
             if (!tracked) tracked = {};
@@ -100,6 +104,41 @@ module.exports = {
 
                 console.log(`No longer follow`);
                 resolve();
+            });
+        })
+    },
+
+    addAdmin: (Client, id) => {
+        return promise = new Promise((resolve, reject) => {
+            delete require.cache[require.resolve('./data/allowedIDS.json')];
+            let allowed = require('./data/allowedIDS.json');
+
+            if (!allowed) allowed = [__config.hyperadmin];
+            allowed.push(id);
+
+            Client.fs.writeFile('./data/allowedIDS.json', JSON.stringify(allowed), (err) => {
+                if (err) return reject(err);
+
+                console.log(`Admin added: ${id}.`);
+                resolve(id);
+            });
+        })
+    },
+
+    deleteAdmin: (Client, id) => {
+        return promise = new Promise((resolve, reject) => {
+            delete require.cache[require.resolve('./data/allowedIDS.json')];
+            let allowed = require('./data/allowedIDS.json');
+
+            if (!allowed) allowed = [__config.hyperadmin];
+            allowed = allowed.filter((i) => i != id);
+            if (allowed.length == 0) allowed.push(__config.hyperadmin);
+
+            Client.fs.writeFile('./data/allowedIDS.json', JSON.stringify(allowed), (err) => {
+                if (err) return reject(err);
+
+                console.log(`Admin removed: ${id}.`);
+                resolve(id);
             });
         })
     },

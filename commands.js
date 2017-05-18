@@ -64,7 +64,7 @@ Commands.tracklist = {
     name: 'tracklist',
     help: 'List of tracked users.',
     fn: function (Client, bot, m, params) {
-        let msg = '__Tracking list:__ \n\n';
+        let msg = '__Track list:__ \n\n';
         let users = require('./data/trackedUsers.json');
 
         Object.keys(users).forEach((key) => {
@@ -100,10 +100,39 @@ Commands.unfollow = {
     name: 'unfollow',
     help: 'Unfollow user.',
     fn: function (Client, bot, m, params) {
-
         Client.fn.unfollowUser(Client)
             .then((user) => Client.fn.dm(bot, m.author.id, `:white_check_mark: Follow disabled`))
             .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
+    }
+}
+
+Commands.addadmin = {
+    name: 'addadmin',
+    help: 'Add admin user.',
+    usage: '<@USER> (<@USER>+)',
+    fn: function (Client, bot, m, params) {
+
+        // Add admin
+        m.mentions.forEach((item) => {
+            Client.fn.addAdmin(Client, item.id)
+                .then((id) => Client.fn.dm(bot, m.author.id, `:white_check_mark: <@${id}> is now an admin`))
+                .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
+        });
+    }
+}
+
+Commands.deladmin = {
+    name: 'deladmin',
+    help: 'Remove admin user.',
+    usage: '<@USERS> (<@USER>+)',
+    fn: function (Client, bot, m, params) {
+
+        // Remove admin
+        m.mentions.forEach((item) => {
+            Client.fn.deleteAdmin(Client, item.id)
+                .then((id) => Client.fn.dm(bot, m.author.id, `:white_check_mark: <@${id}> is now a random`))
+                .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
+        });
     }
 }
 

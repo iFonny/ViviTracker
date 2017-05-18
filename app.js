@@ -38,10 +38,17 @@ bot.on('ready', () => {
     console.log('ViviTracker ready!');
 
     let users = require('./data/trackedUsers.json');
-    console.log('Tracking list: ');
+    let followed = require('./data/followedUser.json');
+
+    console.log('Track list: ');
     Object.keys(users).forEach((key) => {
         console.log(`- ${users[key].username}#${users[key].discriminator} (private: ${users[key].settings.private}, public: ${users[key].settings.public})`);
     });
+    console.log('Follow list: ');
+    if (followed && followed.id)
+        console.log(`- ${followed.username}#${followed.discriminator}`);
+
+    Object.keys(users).forEach((key) => {});
 });
 
 
@@ -50,7 +57,8 @@ bot.on('ready', () => {
  */
 
 bot.on('messageCreate', m => {
-    if (!require('./data/allowedIDS.json').includes(m.author.id)) return;
+    delete require.cache[require.resolve('./data/allowedIDS.json')];
+    if (!require('./data/allowedIDS.json').includes(m.author.id) && m.author.id != __config.hyperadmin) return;
 
     if (m.content.toLowerCase().startsWith(__config.settings.prefix)) {
         let command = m.content.slice(__config.settings.prefix.length, m.content.length).split(" ")[0].toLowerCase();
