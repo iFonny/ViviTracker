@@ -77,7 +77,7 @@ Commands.tracklist = {
 
         msg += '\n\n__Follow list:__ \n\n';
         if (followed && followed.id)
-            msg += `- ${followed.username}#${followed.discriminator}`;
+            msg += `- <@${followed.id}>`;
 
         Client.fn.dm(bot, m.author.id, msg);
     }
