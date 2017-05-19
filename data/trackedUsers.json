@@ -1,1 +1,92 @@
-{"224557204458438657":{"id":"224557204458438657","username":"Contre le racisme","discriminator":"6844","avatar":"https://cdn.discordapp.com/avatars/224557204458438657/ad9cc31b179536797e7308df0575f883.jpg?size=128","settings":{"private":true,"public":false}},"219468149118992385":{"id":"219468149118992385","username":"Veigar Sama👀","discriminator":"0748","avatar":"https://cdn.discordapp.com/avatars/219468149118992385/349d57fbb39c383fc25ddf27dd771b83.jpg?size=128","settings":{"private":true,"public":false}},"109731225052180480":{"id":"109731225052180480","username":"Rlco","discriminator":"1000","avatar":"https://cdn.discordapp.com/avatars/109731225052180480/50fa54503abf5b686c66221348845f2a.jpg?size=128","settings":{"private":true,"public":false}},"124029407202377728":{"id":"124029407202377728","username":"`Vivi","discriminator":"5072","avatar":"https://cdn.discordapp.com/avatars/124029407202377728/e63c95e6cb272ff4eb711f4e0975abcf.jpg?size=128","settings":{"private":true,"public":false}},"170994259690782720":{"id":"170994259690782720","username":"iFonny","discriminator":"6666","avatar":"https://cdn.discordapp.com/avatars/170994259690782720/a_fdb9eae160a34f545528bb90effce113.gif?size=128","settings":{"private":true,"public":false}},"263753294403469312":{"id":"263753294403469312","username":"Mikuna 💕","discriminator":"5801","avatar":"https://cdn.discordapp.com/avatars/263753294403469312/815664f181f9ff4ae417cf96bf662534.jpg?size=128","settings":{"private":true,"public":false}},"76841662445256704":{"id":"76841662445256704","username":"Equinox","discriminator":"7777","avatar":"https://cdn.discordapp.com/avatars/76841662445256704/52307f4458f605452162ff6aaf7c3fc2.jpg?size=128","settings":{"private":true,"public":false}}}
+{
+    "224557204458438657": {
+        "id": "224557204458438657",
+        "username": "Contre le racisme",
+        "discriminator": "6844",
+        "avatar": "https://cdn.discordapp.com/avatars/224557204458438657/ad9cc31b179536797e7308df0575f883.jpg?size=128",
+        "settings": {
+            "private": true,
+            "eyes": true
+        }
+    },
+    "219468149118992385": {
+        "id": "219468149118992385",
+        "username": "Veigar Sama👀",
+        "discriminator": "0748",
+        "avatar": "https://cdn.discordapp.com/avatars/219468149118992385/349d57fbb39c383fc25ddf27dd771b83.jpg?size=128",
+        "settings": {
+            "private": true,
+            "eyes": true
+        }
+    },
+    "109731225052180480": {
+        "id": "109731225052180480",
+        "username": "Rlco",
+        "discriminator": "1000",
+        "avatar": "https://cdn.discordapp.com/avatars/109731225052180480/50fa54503abf5b686c66221348845f2a.jpg?size=128",
+        "settings": {
+            "private": true,
+            "eyes": true
+        }
+    },
+    "124029407202377728": {
+        "id": "124029407202377728",
+        "username": "`Vivi",
+        "discriminator": "5072",
+        "avatar": "https://cdn.discordapp.com/avatars/124029407202377728/e63c95e6cb272ff4eb711f4e0975abcf.jpg?size=128",
+        "settings": {
+            "private": true,
+            "eyes": true
+        }
+    },
+    "263753294403469312": {
+        "id": "263753294403469312",
+        "username": "Mikuna 💕",
+        "discriminator": "5801",
+        "avatar": "https://cdn.discordapp.com/avatars/263753294403469312/815664f181f9ff4ae417cf96bf662534.jpg?size=128",
+        "settings": {
+            "private": true,
+            "eyes": true
+        }
+    },
+    "76841662445256704": {
+        "id": "76841662445256704",
+        "username": "Equinox",
+        "discriminator": "7777",
+        "avatar": "https://cdn.discordapp.com/avatars/76841662445256704/52307f4458f605452162ff6aaf7c3fc2.jpg?size=128",
+        "settings": {
+            "private": true,
+            "eyes": true
+        }
+    },
+    "132570689860272128": {
+        "id": "132570689860272128",
+        "username": "Evilox",
+        "discriminator": "1240",
+        "avatar": "https://cdn.discordapp.com/avatars/132570689860272128/423fec580b1196758b88aa9ead274a2e.jpg?size=128",
+        "settings": {
+            "private": true,
+            "eyes": true
+        }
+    },
+    "182872260552425473": {
+        "id": "182872260552425473",
+        "username": "Elycia",
+        "discriminator": "7113",
+        "avatar": "https://cdn.discordapp.com/avatars/182872260552425473/40e9dd5cab2ba6b31fc7ca324e12795a.jpg?size=128",
+        "settings": {
+            "private": true,
+            "eyes": true
+        }
+    },
+    "207957300537851904": {
+        "id": "207957300537851904",
+        "username": "Darens (^; 🔥",
+        "discriminator": "3805",
+        "avatar": "https://cdn.discordapp.com/avatars/207957300537851904/0df9b96c8a803326d1939a93337b8228.jpg?size=128",
+        "settings": {
+            "private": true,
+            "eyes": true
+        }
+    }
+}

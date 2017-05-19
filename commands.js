@@ -3,33 +3,38 @@ let Commands = [];
 Commands.track = {
     name: 'track',
     help: 'Track user.',
-    usage: '(<public>) <@USER> (<@USER>+)',
+    usage: '(<noeyes|ne|e>) <@USER> (<@USER>+)',
     fn: function (Client, bot, m, params) {
 
         // Default settings
+        let users = [];
         let settings = {
             private: true,
-            public: false
+            eyes: true
         };
 
         // Split params in array
         params = Client.fn.splitParams(params);
 
         // Get settings
-        if (params.includes('public') || params.includes('pub'))
-            settings.public = true;
+        if (params.includes('e') || params.includes('ne') || params.includes('noeyes'))
+            settings.eyes = false;
 
-        // Save users to track
+        // Get users
         m.mentions.forEach((item) => {
-            Client.fn.trackUser(Client, {
-                    id: item.id,
-                    username: item.username,
-                    discriminator: item.discriminator,
-                    avatar: item.avatarURL,
-                    settings: settings
-                }).then((user) => Client.fn.dm(bot, m.author.id, `:white_check_mark: Now tracking <@${user.id}> ${user.settings.public ? 'in *public*' : ''}`))
-                .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
+            users.push({
+                id: item.id,
+                username: item.username,
+                discriminator: item.discriminator,
+                avatar: item.avatarURL,
+                settings: settings
+            });
         });
+
+        // Track users
+        Client.fn.trackUsers(Client, users)
+            .then((msg) => Client.fn.dm(bot, m.author.id, msg))
+            .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err + '`'));
     }
 }
 
@@ -38,25 +43,30 @@ Commands.untrack = {
     help: 'Untrack user.',
     usage: '<@USER> (<@USER>+)',
     fn: function (Client, bot, m, params) {
-        let settings = {};
 
         // Split params in array
         params = Client.fn.splitParams(params);
+        let users = [];
 
-        if (params[0] && params[0] == 'all')
+        // Untrack all users
+        if (params[0] == 'all')
             Client.fn.untrackAll(Client)
             .then((user) => Client.fn.dm(bot, m.author.id, `:white_check_mark: All users deleted`))
             .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
 
-        // Save users to track
+        // Get users
         m.mentions.forEach((item) => {
-            Client.fn.untrackUser(Client, {
-                    id: item.id,
-                    username: item.username,
-                    discriminator: item.discriminator
-                }).then((user) => Client.fn.dm(bot, m.author.id, `:white_check_mark: No longer tracking <@${user.id}>`))
-                .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
+            users.push({
+                id: item.id,
+                username: item.username,
+                discriminator: item.discriminator
+            })
         });
+
+        // Untrack users
+        Client.fn.untrackUsers(Client, users)
+            .then((msg) => Client.fn.dm(bot, m.author.id, msg))
+            .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err + '`'));
     }
 }
 
@@ -72,7 +82,7 @@ Commands.tracklist = {
         let msg = '__Track list:__ \n\n';
 
         Object.keys(users).forEach((key) => {
-            msg += `- <@${users[key].id}> | private: **${users[key].settings.private}** | public: **${users[key].settings.public}**\n`;
+            msg += `- <@${users[key].id}> ${users[key].settings.eyes ? ':eyes:' : ''}\n`;
         });
 
         msg += '\n\n__Follow list:__ \n\n';
@@ -92,6 +102,7 @@ Commands.follow = {
         // Split params in array
         params = Client.fn.splitParams(params);
 
+        // Follow user
         if (m.mentions && m.mentions[0]) {
             Client.fn.followUser(Client, {
                     id: m.mentions[0].id,
@@ -100,7 +111,7 @@ Commands.follow = {
                     avatar: m.mentions[0].avatarURL
                 }).then((user) => Client.fn.dm(bot, m.author.id, `:white_check_mark: Now follow <@${m.mentions[0].id}>`))
                 .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
-        }
+        } else Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `Please use <@USER_ID> as first param`');
     }
 }
 
@@ -108,6 +119,7 @@ Commands.unfollow = {
     name: 'unfollow',
     help: 'Unfollow user.',
     fn: function (Client, bot, m, params) {
+        bot.joinVoiceChannel(__config.settings.vivibed).then(() => console.log('In vivi\'s bed')).catch((err) => console.log(err));
         Client.fn.unfollowUser(Client)
             .then((user) => Client.fn.dm(bot, m.author.id, `:white_check_mark: Follow disabled`))
             .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));

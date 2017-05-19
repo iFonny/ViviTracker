@@ -38,36 +38,54 @@ module.exports = {
             bot.createMessage(__config.settings.privateChannel, embed);
     },
 
-    trackUser: (Client, user) => {
+    trackUsers: (Client, users) => {
         return promise = new Promise((resolve, reject) => {
             delete require.cache[require.resolve('./data/trackedUsers.json')];
             let tracked = require('./data/trackedUsers.json');
 
             if (!tracked) tracked = {};
-            tracked[user.id] = user;
+            if (users.length == 0) reject('Please use <@USER_ID> as first param');
+
+            users.forEach((user) => {
+                tracked[user.id] = user;
+            });
 
             Client.fs.writeFile('./data/trackedUsers.json', JSON.stringify(tracked), (err) => {
-                if (err) return reject(err);
+                if (err) return reject(err.message);
 
-                console.log(`Now tracking: ${user.username}#${user.discriminator} (private: ${user.settings.private}, public: ${user.settings.public}).`);
-                resolve(user);
+                let msg = '';
+                users.forEach((user) => {
+                    console.log(`Now tracking: ${user.username}#${user.discriminator} (private: ${user.settings.private}, eyes: ${user.settings.eyes}).`);
+                    msg += `:white_check_mark: Now tracking <@${user.id}> ${user.settings.eyes ? 'and :eyes:' : ''}\n`;
+                });
+
+                resolve(msg);
             });
         })
     },
 
-    untrackUser: (Client, user) => {
+    untrackUsers: (Client, users) => {
         return promise = new Promise((resolve, reject) => {
             delete require.cache[require.resolve('./data/trackedUsers.json')];
             let tracked = require('./data/trackedUsers.json');
 
             if (!tracked) tracked = {};
-            delete tracked[user.id];
+            if (users.length == 0) reject('Please use <@USER_ID> as first param');
+
+            users.forEach((user) => {
+                delete tracked[user.id];
+            });
 
             Client.fs.writeFile('./data/trackedUsers.json', JSON.stringify(tracked), (err) => {
-                if (err) return reject(err);
+                if (err) return reject(err.message);
 
-                console.log(`${user.username}#${user.discriminator} Untracked.`);
-                resolve(user);
+                let msg = '';
+                users.forEach((user) => {
+                    console.log(`${user.username}#${user.discriminator} Untracked.`);
+                    msg += `:white_check_mark: No longer tracking <@${user.id}>\n`;
+                });
+
+                resolve(msg);
             });
         });
     },

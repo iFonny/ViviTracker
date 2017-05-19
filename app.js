@@ -42,7 +42,7 @@ bot.on('ready', () => {
 
     console.log('Track list: ');
     Object.keys(users).forEach((key) => {
-        console.log(`- ${users[key].username}#${users[key].discriminator} (private: ${users[key].settings.private}, public: ${users[key].settings.public})`);
+        console.log(`- ${users[key].username}#${users[key].discriminator} (private: ${users[key].settings.private}, eyes: ${users[key].settings.eyes})`);
     });
     console.log('Follow list: ');
     if (followed && followed.id)
@@ -77,7 +77,7 @@ bot.on('messageDelete', m => {
     if (m.author && trackedUsers[m.author.id]) {
         if (trackedUsers[m.author.id].settings.private)
             Client.fn.sendDeletedMessage(Client, bot, trackedUsers[m.author.id], m);
-        if (trackedUsers[m.author.id].settings.public) {
+        if (trackedUsers[m.author.id].settings.eyes) {
             // TODO: send message in m.channel.id
         }
 
