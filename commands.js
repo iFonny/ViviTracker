@@ -2,7 +2,7 @@ let Commands = [];
 
 Commands.track = {
     name: 'track',
-    help: 'Track user.',
+    help: 'Track user. Add *\'noeyes\'* as first param to disable eyes.',
     usage: '(<noeyes|ne|e>) <@USER> (<@USER>+)',
     fn: function (Client, bot, m, params) {
 
@@ -153,6 +153,19 @@ Commands.deladmin = {
                 .then((id) => Client.fn.dm(bot, m.author.id, `:white_check_mark: <@${id}> is now a random`))
                 .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
         });
+    }
+}
+
+Commands.help = {
+    name: 'help',
+    help: 'Commands list.',
+    fn: function (Client, bot, m, params) {
+        var msg = '';
+
+        for (var key in Commands) {
+            msg += `\`${__config.settings.prefix}${Commands[key].name} ${Commands[key].usage ? Commands[key].usage : ''} -> ${Commands[key].help}\`\n`
+        }
+        Client.fn.dm(bot, m.author.id, msg);
     }
 }
 
