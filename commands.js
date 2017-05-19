@@ -155,6 +155,25 @@ Commands.pp = {
     }
 }
 
+Commands.rename = {
+    name: 'rename',
+    help: 'Rename user.',
+    usage: 'username',
+    fn: function (Client, bot, m, params) {
+        if (params) {
+            bot.editSelf({
+                username: params,
+                password: __config.password
+            }).then(() => {
+                Client.fn.dm(bot, m.author.id, `:white_check_mark: Renamed to: <@${bot.user.id}>`);
+                console.log(`Renamed to : ${bot.user.username}#${bot.user.discriminator}`);
+            }).catch(() => {
+                console.log("Couldn't rename");
+            });
+        } else Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `Please use USERNAME as first param`');
+    }
+}
+
 Commands.addadmin = {
     name: 'addadmin',
     help: 'Add admin user.',
