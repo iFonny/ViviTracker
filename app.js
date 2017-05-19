@@ -111,9 +111,8 @@ bot.on('voiceChannelLeave', (member, oldChannel) => {
     let trackedUsers = require('./data/trackedUsers.json');
 
     // Follow user
-    if (require('./data/followedUser.json').id == member.id) {
+    if (require('./data/followedUser.json').id == member.id)
         bot.leaveVoiceChannel(oldChannel.id);
-    }
 
     // Send log leave
     if (trackedUsers[member.id])

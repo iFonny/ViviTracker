@@ -141,6 +141,31 @@ Commands.addadmin = {
     }
 }
 
+Commands.join = {
+    name: 'join',
+    help: 'Join user channel.',
+    fn: function (Client, bot, m, params) {
+
+        // Join channel
+        if (m.member.voiceState.channelID) {
+            bot.joinVoiceChannel(m.member.voiceState.channelID)
+                .then((channel) => console.log(`Join ${channel.channelID}`))
+                .catch((err) => console.log(`Can\'t follow in this channel (${m.member.voiceState.channelID})`));
+        }
+    }
+}
+
+Commands.leave = {
+    name: 'leave',
+    help: 'Leave user channel.',
+    fn: function (Client, bot, m, params) {
+
+        // Join channel
+        if (m.member.voiceState.channelID)
+            bot.leaveVoiceChannel(m.member.voiceState.channelID);
+    }
+}
+
 Commands.deladmin = {
     name: 'deladmin',
     help: 'Remove admin user.',
