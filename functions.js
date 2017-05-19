@@ -42,7 +42,7 @@ module.exports = {
         let embed = {
             content: "\n",
             embed: {
-                color: status ? __config.colors.light_green : __config.colors.light_red,
+                color: status ? __config.colors.green : __config.colors.red,
                 timestamp: new Date(),
                 author: {
                     name: user.username,
@@ -50,7 +50,7 @@ module.exports = {
                 },
                 fields: [{
                     name: `👀 Channel ${status ? 'joined' : 'left'} 📞`,
-                    value: `<@${user.id}> ${status ? '📥 join' : '📤 leave'} __<#${channel.id}>__ (in **__${channel.guild.name}__**)`,
+                    value: `${status ? '📥' : '📤'} <@${user.id}> ${status ? 'join' : 'leave'} __<#${channel.id}>__ (in **__${channel.guild.name}__**)`,
                     inline: true
                 }]
             }
@@ -179,22 +179,5 @@ module.exports = {
             });
         })
     },
-
-    getDate: () => {
-        return `${new Date().getDate()().length == 1 ? '0' + new Date().getDate()() : new Date().getDate()()}/${(new Date().getMonth() + 1).toString().length == 1 ? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)}/${new Date().getFullYear()} - ${new Date().getHours().toString().length == 1 ? '0' + new Date().getHours().toString() : new Date().getHours()}h${new Date().getMinutes().toString().length == 1 ? '0' + new Date().getMinutes().toString() : new Date().getMinutes()}`
-    },
-
-    vocalTrack: (Client, data, action) => {
-        return promise = new Promise((resolve, reject) => {
-            let date = require('./functions.js').getDate();
-            let members = [];
-
-            data.newChannel.voiceMembers.forEach(member => {
-                members.push(`${member.username}#${member.discriminator}`);
-            });
-
-            if (fs.existsSync('./data/vocalLogs.txt')) fs.appendFile('./data/vocalLogs.txt', `\n\n${date} - ${data.member.username}#${data.member.discriminator} ${action.toUpperCase()} : ${data.newChannel.guild.name} - ${data.newChannel.name} | Members : ${members.join('   ')}`);
-        });
-    }
 
 };

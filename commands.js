@@ -3,7 +3,7 @@ let Commands = [];
 Commands.track = {
     name: 'track',
     help: 'Track user. Add *\'noeyes\'* as first param to disable eyes.',
-    usage: '(<noeyes|ne|e>) <@USER> (<@USER>+)',
+    usage: '(noeyes|ne|e) <@USER> (<@USER>+)',
     fn: function (Client, bot, m, params) {
 
         // Default settings

@@ -82,7 +82,9 @@ bot.on('messageDelete', m => {
 
         // Send eyes
         if (trackedUsers[m.author.id].settings.eyes)
-            bot.createMessage(m.channel.id, ':eyes:');
+            bot.createMessage(m.channel.id, ':eyes:')
+            .then((message) => console.log(`eyes sent to '${message.channel.name}'`))
+            .catch((err) => console.log(err.message));
     }
 });
 
