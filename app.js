@@ -4,6 +4,7 @@
 
 const fs = require('fs');
 const Eris = require('eris');
+const request = require('request').defaults({ encoding: null });
 
 /**
  * Configs
@@ -21,6 +22,7 @@ const bot = new Eris(__config.token, {
 
 const Client = {
     fs,
+    request,
     fn: require('./functions.js'),
 };
 

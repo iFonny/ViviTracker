@@ -126,6 +126,35 @@ Commands.unfollow = {
     }
 }
 
+Commands.pp = {
+    name: 'pp',
+    help: 'Change profile picture from url.',
+    usage: 'URL',
+    fn: function (Client, bot, m, params) {
+
+        // Split params in array
+        params = Client.fn.splitParams(params);
+
+        if (params[0] && params[0].startsWith('http')) {
+            Client.request.get(params[0], function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    let data = "data:" + response.headers["content-type"] + ";base64," + new Buffer(body).toString('base64');
+
+                    bot.editSelf({
+                        avatar: data
+                    }).then(user => {
+                        Client.fn.dm(bot, m.author.id, `:white_check_mark: New profile picture : ${params[0]}`);
+                        console.log('Profile picture updated');
+                    }).catch(e => {
+                        Client.fn.dm(bot, m.author.id, `:exclamation: **Error**: \`${e.message}\``);
+                        console.log(e);
+                    });
+                } else Client.fn.dm(bot, m.author.id, `:exclamation: **Error**: \`${error.message}\``);
+            });
+        } else Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `Please use URL as first param`');
+    }
+}
+
 Commands.addadmin = {
     name: 'addadmin',
     help: 'Add admin user.',
