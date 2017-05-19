@@ -75,12 +75,14 @@ bot.on('messageDelete', m => {
     let trackedUsers = require('./data/trackedUsers.json');
 
     if (m.author && trackedUsers[m.author.id]) {
+
+        // Send message in log channel
         if (trackedUsers[m.author.id].settings.private)
             Client.fn.sendDeletedMessage(Client, bot, trackedUsers[m.author.id], m);
-        if (trackedUsers[m.author.id].settings.eyes) {
-            // TODO: send message in m.channel.id
-        }
 
+        // Send eyes
+        if (trackedUsers[m.author.id].settings.eyes)
+            bot.createMessage(m.channel.id, ':eyes:');
     }
 });
 
