@@ -91,16 +91,16 @@ bot.on('voiceChannelJoin', (member, newChannel) => {
     delete require.cache[require.resolve('./data/followedUser.json')];
     let trackedUsers = require('./data/trackedUsers.json');
 
+    // Follow user
     if (require('./data/followedUser.json').id == member.id) {
         bot.joinVoiceChannel(newChannel.id)
             .then(() => console.log(`Join ${newChannel.name}`))
             .catch((err) => console.log(`Can\'t follow in this channel (${newChannel.name})`));
     }
-    if (trackedUsers[member.id]) {
-        // TODO: send message in __config.settings.privateChannel
-    }
 
-    //console.log(member.username + '(' + member.id + ')' + ' join ' + newChannel.name);
+    // Send log join
+    if (trackedUsers[member.id])
+        Client.fn.sendVoiceLog(Client, bot, member, newChannel, true);
 });
 
 bot.on('voiceChannelLeave', (member, oldChannel) => {
@@ -108,15 +108,14 @@ bot.on('voiceChannelLeave', (member, oldChannel) => {
     delete require.cache[require.resolve('./data/followedUser.json')];
     let trackedUsers = require('./data/trackedUsers.json');
 
+    // Follow user
     if (require('./data/followedUser.json').id == member.id) {
         bot.leaveVoiceChannel(oldChannel.id);
     }
 
-    if (trackedUsers[member.id]) {
-        // TODO: send message in __config.settings.privateChannel
-    }
-
-    //console.log(member.username + '(' + member.id + ')' + ' leave ' + oldChannel.name);
+    // Send log leave
+    if (trackedUsers[member.id])
+        Client.fn.sendVoiceLog(Client, bot, member, oldChannel, false);
 });
 
 bot.on('voiceChannelSwitch', (member, newChannel, oldChannel) => {
@@ -124,17 +123,16 @@ bot.on('voiceChannelSwitch', (member, newChannel, oldChannel) => {
     delete require.cache[require.resolve('./data/followedUser.json')];
     let trackedUsers = require('./data/trackedUsers.json');
 
+    // Follow user
     if (require('./data/followedUser.json').id == member.id) {
         bot.joinVoiceChannel(newChannel.id)
             .then(() => console.log(`Join ${newChannel.name}`))
             .catch((err) => console.log(`Can\'t follow in this channel (${newChannel.name})`));
     }
 
-    if (trackedUsers[member.id]) {
-        // TODO: send message in __config.settings.privateChannel
-    }
-
-    //console.log(member.username + '(' + member.id + ')' + ' switch from ' + oldChannel.name + ' to ' + newChannel.name);
+    // Send log join
+    if (trackedUsers[member.id])
+        Client.fn.sendVoiceLog(Client, bot, member, newChannel, true);
 });
 
 /**

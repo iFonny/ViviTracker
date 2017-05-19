@@ -35,7 +35,27 @@ module.exports = {
         }
 
         if (message.content && message.content.trim() != '')
-            bot.createMessage(__config.settings.privateChannel, embed);
+            bot.createMessage(__config.settings.deleted_channel, embed);
+    },
+
+    sendVoiceLog: (Client, bot, user, channel, status) => {
+        let embed = {
+            content: "\n",
+            embed: {
+                color: status ? __config.colors.light_green : __config.colors.light_red,
+                timestamp: new Date(),
+                author: {
+                    name: user.username,
+                    icon_url: user.avatarURL
+                },
+                fields: [{
+                    name: `👀 Channel ${status ? 'joined' : 'left'} 📞`,
+                    value: `<@${user.id}> ${status ? '📥 join' : '📤 leave'} __<#${channel.id}>__ (in **__${channel.guild.name}__**)`,
+                    inline: true
+                }]
+            }
+        }
+        bot.createMessage(__config.settings.voicelog_channel, embed);
     },
 
     trackUsers: (Client, users) => {
