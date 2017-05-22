@@ -189,6 +189,21 @@ Commands.addadmin = {
     }
 }
 
+Commands.deladmin = {
+    name: 'deladmin',
+    help: 'Remove admin user.',
+    usage: '<@USERS> (<@USER>+)',
+    fn: function (Client, bot, m, params) {
+
+        // Remove admin
+        m.mentions.forEach((item) => {
+            Client.fn.deleteAdmin(Client, item.id)
+                .then((id) => Client.fn.dm(bot, m.author.id, `:white_check_mark: <@${id}> is now a random`))
+                .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
+        });
+    }
+}
+
 Commands.join = {
     name: 'join',
     help: 'Join user channel.',
@@ -208,24 +223,27 @@ Commands.leave = {
     help: 'Leave user channel.',
     fn: function (Client, bot, m, params) {
 
-        // Join channel
+        // Leave channel
         if (m.member.voiceState.channelID)
-            bot.leaveVoiceChannel(m.member.voiceState.channelID);
+            bot.joinVoiceChannel(__config.settings.vivibed).then(() => console.log('In vivi\'s bed')).catch((err) => console.log(err));
     }
 }
 
-Commands.deladmin = {
-    name: 'deladmin',
-    help: 'Remove admin user.',
-    usage: '<@USERS> (<@USER>+)',
+Commands.say = {
+    name: 'leave',
+    help: 'Speak in channel.',
+    usage: 'channelID message',
     fn: function (Client, bot, m, params) {
 
-        // Remove admin
-        m.mentions.forEach((item) => {
-            Client.fn.deleteAdmin(Client, item.id)
-                .then((id) => Client.fn.dm(bot, m.author.id, `:white_check_mark: <@${id}> is now a random`))
-                .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
-        });
+        // Split params in array
+        params = Client.fn.splitParams(params);
+
+        if (params && params.length >= 2) {
+            let channelID = params.shift();
+            let message = params.join(' ');
+            bot.createMessage(channelID, message)
+                .then(() => {}).catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
+        } else Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `ChannelID or message missing`');
     }
 }
 

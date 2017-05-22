@@ -4,7 +4,9 @@
 
 const fs = require('fs');
 const Eris = require('eris');
-const request = require('request').defaults({ encoding: null });
+const request = require('request').defaults({
+    encoding: null
+});
 
 /**
  * Configs
@@ -49,6 +51,8 @@ bot.on('ready', () => {
     console.log('Follow list: ');
     if (followed && followed.id)
         console.log(`- ${followed.username}#${followed.discriminator}`);
+
+    bot.joinVoiceChannel(__config.settings.vivibed).then(() => console.log('In vivi\'s bed')).catch((err) => console.log(err));
 });
 
 
