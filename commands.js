@@ -204,6 +204,18 @@ Commands.deladmin = {
     }
 }
 
+Commands.bed = {
+    name: 'bed',
+    help: 'Go to bed.',
+    fn: function (Client, bot, m, params) {
+
+        // Join channel
+        bot.joinVoiceChannel(__config.settings.vivibed)
+            .then((channel) => console.log(`In vivi's bed`))
+            .catch((err) => console.log(`Can\'t join bed`));
+    }
+}
+
 Commands.join = {
     name: 'join',
     help: 'Join user channel.',
