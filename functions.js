@@ -84,6 +84,7 @@ module.exports = {
         })
     },
 
+
     untrackUsers: (Client, users) => {
         return promise = new Promise((resolve, reject) => {
             delete require.cache[require.resolve('./data/trackedUsers.json')];
@@ -176,6 +177,24 @@ module.exports = {
 
                 console.log(`Admin removed: ${id}.`);
                 resolve(id);
+            });
+        })
+    },
+
+    addLillyBlabla: (Client, message) => {
+        return promise = new Promise((resolve, reject) => {
+            delete require.cache[require.resolve('./data/bblilly.json')];
+            let bbLilly = require('./data/bblilly.json');
+
+            if (!bbLilly) bbLilly = [];
+
+            bbLilly.push(message);
+
+            Client.fs.writeFile('./data/bblilly.json', JSON.stringify(bbLilly), (err) => {
+                if (err) return reject(err.message);
+                
+                console.log(`Lilly added: ${message}.`);
+                resolve(`:white_check_mark: Lilly added ${message}`);
             });
         })
     },

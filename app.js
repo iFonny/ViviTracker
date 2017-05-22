@@ -78,7 +78,9 @@ bot.on('messageCreate', m => {
 
 bot.on('messageDelete', m => {
     delete require.cache[require.resolve('./data/trackedUsers.json')];
+    delete require.cache[require.resolve('./data/bblilly.json')];
     let trackedUsers = require('./data/trackedUsers.json');
+    let bbLilly = require('./data/bblilly.json');
 
     if (m.author && trackedUsers[m.author.id]) {
 
@@ -88,7 +90,7 @@ bot.on('messageDelete', m => {
 
         // Send eyes
         if (trackedUsers[m.author.id].settings.eyes)
-            bot.createMessage(m.channel.id, ':eyes:')
+            bot.createMessage(m.channel.id, bbLilly[Math.floor(Math.random() * bbLilly.length)])
             .then((message) => console.log(`eyes sent to '${message.channel.name}'`))
             .catch((err) => console.log(err.message));
     }

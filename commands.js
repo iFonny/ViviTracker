@@ -213,7 +213,7 @@ Commands.join = {
         if (m.member.voiceState.channelID) {
             bot.joinVoiceChannel(m.member.voiceState.channelID)
                 .then((channel) => console.log(`Join ${channel.channelID}`))
-                .catch((err) => console.log(`Can\'t follow in this channel (${m.member.voiceState.channelID})`));
+                .catch((err) => console.log(`Can\'t join this channel (${m.member.voiceState.channelID})`));
         }
     }
 }
@@ -244,6 +244,21 @@ Commands.say = {
             bot.createMessage(channelID, message)
                 .then(() => {}).catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err.message + '`'));
         } else Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `ChannelID or message missing`');
+    }
+}
+
+Commands.addlilly = {
+    name: 'addlilly',
+    help: 'Add a bbLilly sentence',
+    usage: 'message',
+    fn: function (Client, bot, m, params) {
+        if (params && params.length > 0) {
+
+            // Add message bbLilly
+            Client.fn.addLillyBlabla(Client, params)
+                .then((msg) => Client.fn.dm(bot, m.author.id, msg))
+                .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err + '`'));
+        } else Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `Please use MESSAGE as first param`');
     }
 }
 
