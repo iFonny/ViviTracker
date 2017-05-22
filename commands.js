@@ -242,7 +242,7 @@ Commands.leave = {
 }
 
 Commands.say = {
-    name: 'leave',
+    name: 'say',
     help: 'Speak in channel.',
     usage: 'channelID message',
     fn: function (Client, bot, m, params) {
