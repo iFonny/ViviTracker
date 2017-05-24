@@ -89,10 +89,10 @@ bot.on('messageDelete', m => {
             Client.fn.sendDeletedMessage(Client, bot, trackedUsers[m.author.id], m);
 
         // Send eyes
-        if (trackedUsers[m.author.id].settings.eyes)
+        /*if (trackedUsers[m.author.id].settings.eyes)
             bot.createMessage(m.channel.id, bbLilly[Math.floor(Math.random() * bbLilly.length)])
             .then((message) => console.log(`eyes sent to '${message.channel.name}'`))
-            .catch((err) => console.log(err.message));
+            .catch((err) => console.log(err.message));*/
     }
 });
 
