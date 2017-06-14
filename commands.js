@@ -262,7 +262,7 @@ Commands.say = {
 Commands.sound = {
     name: 'sound',
     help: 'Sing in channel.',
-    usage: '(id|name)',
+    usage: '(id|name|list|random|pause|resume|stop)',
     fn: function (Client, bot, m, params) {
         const sounds = require('./data/sounds.json');
 
