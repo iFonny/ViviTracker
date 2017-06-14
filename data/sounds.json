@@ -1,0 +1,102 @@
+[{
+        "name": "123soleil",
+        "file": "./data/sounds/BB - 123Soleil.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "allopapy",
+        "file": "./data/sounds/BB - AlloPapy.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "bigbisou",
+        "file": "./data/sounds/BB - BigBisou.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "espace",
+        "file": "./data/sounds/BB - DansLEspace.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "doudou",
+        "file": "./data/sounds/BB - DoudouJeTAime.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "planete",
+        "file": "./data/sounds/BB - DroleDePlanete.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "changa",
+        "file": "./data/sounds/BB - LaChanga.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "jungle",
+        "file": "./data/sounds/BB - LaJungleDesAnimaux.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "betises",
+        "file": "./data/sounds/BB - LesBetises.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "contesdefees",
+        "file": "./data/sounds/BB - LesContesDeFees.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "cowboys",
+        "file": "./data/sounds/BB - LesCowboys.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "fantomes",
+        "file": "./data/sounds/BB - LesFantomes.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "jeuxvideo",
+        "file": "./data/sounds/BB - LesJeuxVideo.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "pirates",
+        "file": "./data/sounds/BB - Lespirates.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "memepaspeur",
+        "file": "./data/sounds/BB - MemePasPeur.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "monbeausapin",
+        "file": "./data/sounds/BB - MonBeauSapin.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "papanoel",
+        "file": "./data/sounds/BB - PetitPapaNoel.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "raspoutine",
+        "file": "./data/sounds/BB - Raspoutine.mp3",
+        "volume": "0.5"
+    },
+    {
+        "name": "viensavecmoi",
+        "file": "./data/sounds/BB - ViensAvecMoi.mp3",
+        "volume": "0.5"
+    }, 
+    {
+        "name": "unboeuf",
+        "file": "./data/sounds/unboeuf.mp3",
+        "volume": "0.5"
+    }
+
+]

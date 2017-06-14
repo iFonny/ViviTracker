@@ -192,11 +192,59 @@ module.exports = {
 
             Client.fs.writeFile('./data/bblilly.json', JSON.stringify(bbLilly), (err) => {
                 if (err) return reject(err.message);
-                
+
                 console.log(`Lilly added: ${message}.`);
                 resolve(`:white_check_mark: Lilly added ${message}`);
             });
         })
     },
+
+    startSound: (bot, channel, file) => {
+        bot.joinVoiceChannel(channel)
+            .then((connexion) => {
+                connexion.play(file);
+
+                /*connexion.on('end', () => {
+                    bot.leaveVoiceChannel(channel);
+                });*/
+            })
+            .catch((err) => console.log(`Can\'t join this channel (${channel})`));
+    },
+
+    stopSound: (bot, channel) => {
+        bot.joinVoiceChannel(channel)
+            .then((connexion) => {
+                connexion.stopPlaying();
+            })
+            .catch((err) => console.log(`Can\'t join this channel (${channel})`));
+    },
+
+    pauseSound: (bot, channel) => {
+        bot.joinVoiceChannel(channel)
+            .then((connexion) => {
+                connexion.pause();
+            })
+            .catch((err) => console.log(`Can\'t join this channel (${channel})`));
+    },
+
+    resumeSound: (bot, channel) => {
+        bot.joinVoiceChannel(channel)
+            .then((connexion) => {
+                connexion.resume();
+            })
+            .catch((err) => console.log(`Can\'t join this channel (${channel})`));
+    },
+
+    listSounds: (sounds) => {
+		var newmsg = "Sounds : \n ```md\n";
+
+        sounds.forEach((sound, i) => {
+            newmsg += `[${i}] nom : < ${sound.name} > | file : < ${sound.file} >\n`;
+        })
+		
+		newmsg += "\n```";
+
+        return newmsg;
+    }
 
 };

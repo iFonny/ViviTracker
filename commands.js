@@ -259,6 +259,48 @@ Commands.say = {
     }
 }
 
+Commands.sound = {
+    name: 'sound',
+    help: 'Sing in channel.',
+    usage: '(id|name)',
+    fn: function (Client, bot, m, params) {
+        const sounds = require('./data/sounds.json');
+
+        if (params) {
+            params = params.trim();
+            if (params.length > 0) {   
+                if (params.toLowerCase() == 'list') return Client.fn.dm(bot, m.author.id, Client.fn.listSounds(sounds));
+
+                if (m.member.voiceState && m.member.voiceState.channelID) {
+
+                    if (params.toLowerCase() == 'random') return Client.fn.startSound(bot, m.member.voiceState.channelID, sounds[Math.floor(Math.random() * sounds.length)].file);
+
+                    switch (params.toLowerCase()) {
+                        case 'stop':
+                            Client.fn.stopSound(bot, m.member.voiceState.channelID);
+                            break;
+                        case 'pause':
+                            Client.fn.pauseSound(bot, m.member.voiceState.channelID);
+                            break;
+                        case 'resume':
+                            Client.fn.resumeSound(bot, m.member.voiceState.channelID);
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    sounds.forEach((sound, index) => {
+                        if (parseInt(params, 10) == index) Client.fn.startSound(bot, m.member.voiceState.channelID, sound.file);
+                        else if (params.toLowerCase() == sound.name) Client.fn.startSound(bot, m.member.voiceState.channelID, sound.file);
+                    });
+
+                } else return Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `Please connect to a voice channel`');
+            } else return Client.fn.dm(bot, m.author.id, Client.fn.listSounds(sounds));
+        } else return Client.fn.dm(bot, m.author.id, Client.fn.listSounds(sounds));
+    }
+}
+
 Commands.addlilly = {
     name: 'addlilly',
     help: 'Add a bbLilly sentence',
