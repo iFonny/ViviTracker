@@ -97,6 +97,11 @@
         "name": "unboeuf",
         "file": "./data/sounds/unboeuf.mp3",
         "volume": "0.5"
+    },
+    {
+        "name": "agitateur",
+        "file": "./data/sounds/Jean Cronal - Agitateur.mp3",
+        "volume": "0.5"
     }
 
 ]
