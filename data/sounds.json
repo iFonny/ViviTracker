@@ -25,6 +25,11 @@
         "volume": "0.5"
     },
     {
+        "name": "nightcore",
+        "file": "./data/sounds/Ilona - NightcoreUnMondeParfait.mp3",
+        "volume": "0.5"
+    },
+    {
         "name": "123soleil",
         "file": "./data/sounds/BB - 123Soleil.mp3",
         "volume": "0.5"
