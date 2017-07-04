@@ -1,30 +1,4 @@
-[   
-    {
-        "name": "alloallo",
-        "file": "./data/sounds/Ilona - AlloAllo.mp3",
-        "volume": "0.5"
-    },
-    {
-        "name": "vacances",
-        "file": "./data/sounds/Ilona - CEstLesVacances.mp3",
-        "volume": "0.5"
-    },
-    {
-        "name": "fusee",
-        "file": "./data/sounds/Ilona - DansMaFusee.mp3",
-        "volume": "0.5"
-    },
-    {
-        "name": "bonheur",
-        "file": "./data/sounds/Ilona - NoelQueDuBonheur.mp3",
-        "volume": "0.5"
-    },
-    {
-        "name": "mondeparfait",
-        "file": "./data/sounds/Ilona - UnMondeParfait.mp3",
-        "volume": "0.5"
-    },
-    {
+[{
         "name": "123soleil",
         "file": "./data/sounds/BB - 123Soleil.mp3",
         "volume": "0.5"

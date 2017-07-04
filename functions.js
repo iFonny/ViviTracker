@@ -181,20 +181,20 @@ module.exports = {
         })
     },
 
-    addLillyBlabla: (Client, message) => {
+    addIlonaBlabla: (Client, message) => {
         return promise = new Promise((resolve, reject) => {
-            delete require.cache[require.resolve('./data/bblilly.json')];
-            let bbLilly = require('./data/bblilly.json');
+            delete require.cache[require.resolve('./data/ilona.json')];
+            let ilona = require('./data/ilona.json');
 
-            if (!bbLilly) bbLilly = [];
+            if (!ilona) ilona = [];
 
-            bbLilly.push(message);
+            ilona.push(message);
 
-            Client.fs.writeFile('./data/bblilly.json', JSON.stringify(bbLilly), (err) => {
+            Client.fs.writeFile('./data/ilona.json', JSON.stringify(ilona), (err) => {
                 if (err) return reject(err.message);
 
-                console.log(`Lilly added: ${message}.`);
-                resolve(`:white_check_mark: Lilly added ${message}`);
+                console.log(`Ilona added: ${message}.`);
+                resolve(`:white_check_mark: Ilona added ${message}`);
             });
         })
     },

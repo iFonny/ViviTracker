@@ -301,15 +301,15 @@ Commands.sound = {
     }
 }
 
-Commands.addlilly = {
-    name: 'addlilly',
-    help: 'Add a bbLilly sentence',
+Commands.addilona = {
+    name: 'addlilona',
+    help: 'Add a ilona sentence',
     usage: 'message',
     fn: function (Client, bot, m, params) {
         if (params && params.length > 0) {
 
-            // Add message bbLilly
-            Client.fn.addLillyBlabla(Client, params)
+            // Add message ilona
+            Client.fn.addIlonaBlabla(Client, params)
                 .then((msg) => Client.fn.dm(bot, m.author.id, msg))
                 .catch((err) => Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `' + err + '`'));
         } else Client.fn.dm(bot, m.author.id, ':exclamation: **Error**: `Please use MESSAGE as first param`');
